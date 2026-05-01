@@ -1,0 +1,51 @@
+version: "3.8"
+
+services:
+  conan-exiles:
+    image: slymer29/gsh-conan-exiles:latest
+    container_name: gsh-conan-exiles
+    restart: unless-stopped
+
+    ports:
+      - "7777:7777/udp"
+      - "7778:7778/udp"
+      - "27015:27015/udp"
+      - "25575:25575/tcp"
+
+    environment:
+      GSH_TZ: "Europe/Paris"
+      GSH_PUID: "1000"
+      GSH_PGID: "1000"
+
+      GSH_SERVER_NAME: "Mon serveur Conan Exiles"
+      GSH_SERVER_PASSWORD: ""
+      GSH_ADMIN_PASSWORD: "changeme"
+      GSH_MAX_PLAYERS: "40"
+
+      GSH_GAME_PORT: "7777"
+      GSH_GAME_PORT_RAW: "7778"
+      GSH_QUERY_PORT: "27015"
+      GSH_RCON_ENABLED: "false"
+      GSH_RCON_PORT: "25575"
+      GSH_RCON_PASSWORD: "changeme"
+
+      GSH_STEAM_APP_ID: "443030"
+      GSH_STEAM_USER: "anonymous"
+      GSH_STEAM_PASSWORD: ""
+      GSH_GAME_UPDATE: "true"
+      GSH_VALIDATE_FILES: "true"
+
+      GSH_USE_WINE: "true"
+      GSH_WINEPREFIX: "/opt/wine/conan-exiles"
+      GSH_WINEARCH: "win64"
+      GSH_DISPLAY: ":99"
+      GSH_XVFB_RESOLUTION: "1024x768x16"
+
+      GSH_SERVER_EXE: "ConanSandboxServer.exe"
+      GSH_START_ARGS: "-log"
+
+    volumes:
+      - ./data/server:/opt/games/server
+      - ./data/config:/opt/games/config
+      - ./data/wine:/opt/wine
+      - ./data/steam:/opt/steam
